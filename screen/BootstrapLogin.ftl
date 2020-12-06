@@ -11,7 +11,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <style type="text/css">
    /* set entire body that is webpage */
-    body{
+    .login-container{
       //background: #383a3d;
       padding-top: 25vh;
     }
@@ -50,26 +50,52 @@
 <body>
 <!-- Login form creation starts-->
   <div class="container-fluid">
-    <section class="row justify-content-center">
+    <#if ec.web.savedMessages??>
+      <#list ec.web.savedMessages as savedMessage>
+        <div class="alert alert-success" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4>${savedMessage}</h4>
+        </div>
+      </#list>
+    </#if>
+    <#if ec.web.savedErrors??>
+      <#list ec.web.savedErrors as savedError>
+        <div class="alert alert-danger" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4>${savedError}</h4>
+        </div>
+      </#list>
+    </#if>
+    <#if ec.web.savedValidationErrors??>
+      <#list ec.web.savedValidationErrors as savedValidationError>
+        <div class="alert alert-danger" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4>${savedValidationError}</h4>
+        </div>
+      </#list>
+    </#if>
+
+    <section class="row justify-content-center login-container">
       <section class="col-12 col-sm-6 col-md-5">
         <div class="tab-content card pt-5 pl-5 pr-5" id="myTabContentJust">
           <div class="tab-pane fade show active" id="home-just" role="tabpanel" aria-labelledby="home-tab-just">
-            <form class="form-container login-form">
+            <form method="post" class="form-container login-form" action="${sri.buildUrl("login").url}">
               <div class="form-group">
                 <h4 class="text-center font-weight-bold"> Login </h4>
-                <label for="InputEmail1">Email Address</label>
-                <input type="email" class="form-control" id="InputEmail1" aria-describeby="emailHelp" placeholder="Enter email">
+                <label for="login_form_username">${ec.l10n.localize("Username")}</label>
+                <input type="text" class="form-control" id="login_form_username" name="username" aria-describeby="usernameHelp" placeholder="${ec.l10n.localize("Username")}" required="required">
               </div>
               <div class="form-group">
-                <label for="InputPassword1">Password</label>
-                <input type="password" class="form-control" id="InputPassword1" placeholder="Password">
+                <label for="login_form_password">${ec.l10n.localize("Password")}</label>
+                <input type="password" class="form-control" id="login_form_password" name="password" placeholder="${ec.l10n.localize("Password")}" required="required">
               </div>
-              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+              <button type="submit" class="btn btn-primary btn-block">${ec.l10n.localize("Sign in")}</button>
             </form>
+            <script>$("#login_form_username").focus();</script>
           </div>
           <div class="tab-pane fade" id="profile-just" role="tabpanel" aria-labelledby="profile-tab-just">
             <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1
-              labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft
+              labore velit, blog sartorial PBR leggings next level wes anderson rtisan four loko farm-to-table craft
               beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad
               vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
               helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes
