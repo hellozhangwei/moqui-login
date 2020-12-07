@@ -78,7 +78,7 @@
     <section class="row justify-content-center login-container">
       <section class="col-12 col-sm-6 col-md-5">
         <div class="tab-content card pt-5 pl-5 pr-5" id="myTabContentJust">
-          <div class="tab-pane fade show active" id="home-just" role="tabpanel" aria-labelledby="home-tab-just">
+          <div class="tab-pane fade show active" id="login-panel" role="tabpanel" aria-labelledby="home-tab-just">
             <form method="post" class="form-container login-form" action="${sri.buildUrl("login").url}">
               <div class="form-group">
                 <h4 class="text-center font-weight-bold"> Login </h4>
@@ -93,36 +93,50 @@
             </form>
             <script>$("#login_form_username").focus();</script>
           </div>
-          <div class="tab-pane fade" id="profile-just" role="tabpanel" aria-labelledby="profile-tab-just">
-            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1
-              labore velit, blog sartorial PBR leggings next level wes anderson rtisan four loko farm-to-table craft
-              beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad
-              vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
-              helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes
-              anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party
-              scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+          <div class="tab-pane fade" id="reset-panel" role="tabpanel" aria-labelledby="profile-tab-just">
+            <form method="post" action="${sri.buildUrl("resetPassword").url}" class="form-signin" id="reset_form">
+              <div class="form-group">
+                <h4 class="text-center font-weight-bold"> ${ec.l10n.localize("Enter your username to reset and email your password")} </h4>
+                <label for="reset_form_username">${ec.l10n.localize("Username")}</label>
+                <input type="text" class="form-control" id="reset_form_username" name="username" aria-describeby="usernameHelp" placeholder="${ec.l10n.localize("Username")}" required="required">
+              </div>
+              <input type="hidden" name="moquiSessionToken" value="${ec.web.sessionToken}">
+              <button class="btn btn-lg btn-danger btn-block" type="submit">${ec.l10n.localize("Reset &amp; Email Password")}</button>
+            </form>
           </div>
-          <div class="tab-pane fade" id="contact-just" role="tabpanel" aria-labelledby="contact-tab-just">
-            <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro
-              fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone
-              skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings
-              gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork
-              biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl
-              craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+          <div class="tab-pane fade" id="change-panel" role="tabpanel" aria-labelledby="contact-tab-just">
+            <form method="post" action="${sri.buildUrl("changePassword").url}" class="form-signin" id="change_form">
+              <input type="hidden" name="moquiSessionToken" value="${ec.web.sessionToken}">
+              <div class="form-group">
+                <h4 class="text-center font-weight-bold"> ${ec.l10n.localize("Enter details to change your password")} </h4>
+                <label for="change_form_username">${ec.l10n.localize("Username")}</label>
+                <input type="text" id="change_form_username" name="username" value="${(ec.getWeb().getErrorParameters().get("username"))!""}" placeholder="${ec.l10n.localize("Username")}" required="required" class="form-control top">
+              </div>
+              <div class="form-group">
+                <label for="change_form_old_password">${ec.l10n.localize("Old Password")}</label>
+                <input type="password" id="change_form_old_password" name="oldPassword" placeholder="${ec.l10n.localize("Old Password")}" required="required" class="form-control middle">
+              </div>
+              <div class="form-group">
+                <label for="change_form_new_password">${ec.l10n.localize("New Password")}</label>
+                <input type="password" id="change_form_new_password" name="newPassword" placeholder="${ec.l10n.localize("New Password")}" required="required" class="form-control middle">
+              </div>
+              <div class="form-group">
+                <label for="change_form_new_password_verify">${ec.l10n.localize("New Password Verify")}</label>
+                <input type="password" id="change_form_new_password_verify" name="newPasswordVerify" placeholder="${ec.l10n.localize("New Password Verify")}" required="required" class="form-control bottom">
+              </div>
+              <button class="btn btn-lg btn-danger btn-block" type="submit">${ec.l10n.localize("Change Password")}</button>
+            </form>
           </div>
         </div>
         <ul class="nav nav-tabs nav-justified md-tabs indigo" id="myTabJust" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="home-tab-just" data-toggle="tab" href="#home-just" role="tab" aria-controls="home-just"
-               aria-selected="true">Login</a>
+            <a class="nav-link active" id="home-tab-just" data-toggle="tab" href="#login-panel" role="tab" aria-controls="login-panel" aria-selected="true">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="profile-tab-just" data-toggle="tab" href="#profile-just" role="tab" aria-controls="profile-just"
-               aria-selected="false">Reset Password</a>
+            <a class="nav-link" id="profile-tab-just" data-toggle="tab" href="#reset-panel" role="tab" aria-controls="reset-panel" aria-selected="false">Reset Password</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="contact-tab-just" data-toggle="tab" href="#contact-just" role="tab" aria-controls="contact-just"
-               aria-selected="false">Forgot Password</a>
+            <a class="nav-link" id="contact-tab-just" data-toggle="tab" href="#change-panel" role="tab" aria-controls="change-panel" aria-selected="false">Change Password</a>
           </li>
         </ul>
       </section>
