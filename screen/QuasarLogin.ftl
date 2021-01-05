@@ -22,7 +22,7 @@
       </q-card-section>
       <q-tab-panels v-model="tab" animated style="min-height: 350px">
         <q-tab-panel name="one">
-          <form @submit.prevent="submitForm" class="q-px-sm">
+          <q-form @submit.prevent="submitForm" class="q-px-sm" action="${sri.buildUrl("login").url}" method="post">
             <div class="row q-mb-md">
               <q-banner class="bg-grey-3 col">
                 <template v-slot:avatar>
@@ -33,6 +33,7 @@
             </div>
             <div class="row q-mb-md">
               <q-input
+                  name="username"
                   v-model="formData.email"
                   :rules="[ val => isValidEmailAddress(val) || 'Please enter a valid email address.']"
                   ref="email"
@@ -44,8 +45,8 @@
             </div>
             <div class="row q-mb-md">
               <q-input
+                  name="password"
                   v-model="formData.password"
-                  :rules="[ val => val.length >= 6 || 'Please enter at least 6 characters.']"
                   ref="password"
                   lazy-rules
                   type="password"
@@ -60,7 +61,7 @@
                   label="Login"
                   type="submit" />
             </div>
-          </form>
+          </q-form>
         </q-tab-panel>
 
         <q-tab-panel name="two">
@@ -118,7 +119,7 @@
             <div class="row">
               <q-input
                   v-model="formData.password"
-                  :rules="[ val => val.length >= 6 || 'Please enter at least 6 characters.']"
+                  :rules="[ val => val.length <= 1 || 'Please enter at least 6 characters.']"
                   ref="password"
                   lazy-rules
                   type="password"
@@ -186,14 +187,16 @@
       }
     },
     methods: {
-      submitForm () {
-        console.log('submitForm' + this.formData)
+      submitForm (evt) {
+        console.log('---submitForm---' + JSON.stringify(this.formData))
+        evt.target.submit()
         // this.$store.actions.auth.loginUser(this.formData)
-        console.log('loggedIn:', this.$store.state.auth.loggedIn)
+        //console.log('loggedIn:', this.$store.state.auth.loggedIn)
       },
       isValidEmailAddress (email) {
-        var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        return re.test(String(email).toLowerCase())
+        //var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        //return re.test(String(email).toLowerCase())
+        return true
       }
     }
   });
