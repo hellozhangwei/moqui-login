@@ -18,7 +18,7 @@
   <div class="window-height window-width row justify-center items-center">
     <q-card class="my-card">
       <q-card-section>
-        <div class="text-h6 text-center">Moqui ERP System</div>
+        <div class="text-h6 text-center">WE SYS ERP</div>
       </q-card-section>
       <q-tab-panels v-model="tab" animated style="min-height: 350px">
         <q-tab-panel name="one">
@@ -26,7 +26,7 @@
             <div class="row q-mb-md">
               <q-banner class="bg-grey-3 col">
                 <template v-slot:avatar>
-                  <q-icon name="account_circle" color="primary" />
+                  <q-icon name="login" color="primary" />
                 </template>
                 <div class="text-h6">Login</div>
               </q-banner>
@@ -69,7 +69,7 @@
             <div class="row q-mb-md">
               <q-banner class="bg-grey-3 col">
                 <template v-slot:avatar>
-                  <q-icon name="account_circle" color="primary" />
+                  <q-icon name="forward_to_inbox" color="primary" />
                 </template>
                 <div class="text-h6">Reset Password</div>
               </q-banner>
@@ -100,7 +100,7 @@
             <div class="row q-mb-md">
               <q-banner class="bg-grey-3 col">
                 <template v-slot:avatar>
-                  <q-icon name="account_circle" color="primary" />
+                  <q-icon name="password" color="primary" />
                 </template>
                 <div class="text-h6">Change Password</div>
               </q-banner>
@@ -163,9 +163,9 @@
       </q-tab-panels>
       <q-separator></q-separator>
       <q-tabs v-model="tab" class="text-secondary">
-        <q-tab label="Login" name="one" class="col"></q-tab>
-        <q-tab label="Reset Password" name="two" class="col"></q-tab>
-        <q-tab label="Change Password" name="three" class="col"></q-tab>
+        <q-tab label="Login" name="one" class="col" style="width:200px"></q-tab>
+        <q-tab label="Reset Password" name="two" class="col" style="width:200px"></q-tab>
+        <q-tab label="Change Password" name="three" class="col" style="width:200px"></q-tab>
       </q-tabs>
     </q-card>
   </div>
