@@ -198,6 +198,11 @@
         //return re.test(String(email).toLowerCase())
         return true
       }
+    },
+    mounted: function() {
+        <#if ec.web.savedErrors??><#list ec.web.savedErrors as errorMessage>
+          this.$q.notify({type: 'negative', message: '${errorMessage}.', icon: 'warning', position:'top'})
+        </#list></#if>
     }
   });
 </script>
