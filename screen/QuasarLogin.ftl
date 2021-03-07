@@ -35,12 +35,12 @@
               <q-input
                   name="username"
                   v-model="formData.email"
-                  :rules="[ val => isValidEmailAddress(val) || 'Please enter a valid email address.']"
-                  ref="email"
+                  :rules="[ val => !!val || 'Username is required.']"
+                  ref="username"
                   lazy-rules
                   outlined
                   class="col"
-                  label="Email"
+                  label="Username"
                   stack-label />
             </div>
             <div class="row q-mb-md">
@@ -48,6 +48,7 @@
                   name="password"
                   v-model="formData.password"
                   ref="password"
+                  :rules="[ val => !!val || 'Password is required.']"
                   lazy-rules
                   type="password"
                   outlined
@@ -65,7 +66,9 @@
         </q-tab-panel>
 
         <q-tab-panel name="two">
-          <form @submit.prevent="submitForm" class="q-px-sm">
+          <form @submit.prevent="submitForm" class="q-px-sm" action="${sri.buildUrl("resetPassword").url}" method="post">
+            <input type="hidden" name="moquiSessionToken" value="${ec.web.sessionToken}">
+            <input type="hidden" name="tab" value="two">
             <div class="row q-mb-md">
               <q-banner class="bg-grey-3 col">
                 <template v-slot:avatar>
@@ -76,18 +79,18 @@
             </div>
             <div class="row q-mb-md">
               <q-input
-                  v-model="formData.email"
-                  :rules="[ val => isValidEmailAddress(val) || 'Please enter a valid email address.']"
-                  ref="email"
+                  name="username"
+                  v-model="formData.username"
+                  ref="username"
+                  :rules="[ val => !!val || 'Username is required.']"
                   lazy-rules
                   outlined
                   class="col"
-                  label="Email"
+                  label="Username"
                   stack-label />
             </div>
 
             <div class="row justify-end">
-<!--              <q-space />-->
               <q-btn
                   color="primary"
                   label="Reset & Email Password"
@@ -96,7 +99,9 @@
           </form>
         </q-tab-panel>
         <q-tab-panel name="three">
-          <form @submit.prevent="submitForm" class="q-px-sm">
+          <form @submit.prevent="submitForm" class="q-px-sm" action="${sri.buildUrl("changePassword").url}" method="post">
+            <input type="hidden" name="moquiSessionToken" value="${ec.web.sessionToken}">
+            <input type="hidden" name="tab" value="three">
             <div class="row q-mb-md">
               <q-banner class="bg-grey-3 col">
                 <template v-slot:avatar>
@@ -107,20 +112,22 @@
             </div>
             <div class="row ">
               <q-input
-                  v-model="formData.email"
-                  :rules="[ val => isValidEmailAddress(val) || 'Please enter a valid email address.']"
-                  ref="email"
+                  name="username"
+                  v-model="formData.username"
+                  ref="username"
+                  :rules="[ val => !!val || 'Username is required.']"
                   lazy-rules
                   outlined
                   class="col"
-                  label="Email"
+                  label="Username"
                   stack-label />
             </div>
             <div class="row">
               <q-input
-                  v-model="formData.password"
-                  :rules="[ val => val.length <= 1 || 'Please enter at least 6 characters.']"
-                  ref="password"
+                  name="oldPassword"
+                  v-model="formData.oldPassword"
+                  :rules="[ val => !!val || 'Old Password is required.']"
+                  ref="oldPassword"
                   lazy-rules
                   type="password"
                   outlined
@@ -130,9 +137,10 @@
             </div>
             <div class="row ">
               <q-input
-                  v-model="formData.password"
+                  name="newPassword"
+                  v-model="formData.newPassword"
                   :rules="[ val => val.length >= 6 || 'Please enter at least 6 characters.']"
-                  ref="password"
+                  ref="oldPassword"
                   lazy-rules
                   type="password"
                   outlined
@@ -142,9 +150,10 @@
             </div>
             <div class="row ">
               <q-input
-                  v-model="formData.password"
+                  name="newPasswordVerify"
+                  v-model="formData.newPasswordVerify"
                   :rules="[ val => val.length >= 6 || 'Please enter at least 6 characters.']"
-                  ref="password"
+                  ref="newPasswordVerify"
                   lazy-rules
                   type="password"
                   outlined
@@ -181,8 +190,11 @@
       return {
         tab: 'one' ,
         formData: {
-          email: '',
-          password: ''
+          username: '',
+          password: '',
+          oldPassword: '',
+          newPassword: '',
+          newPasswordVerify: ''
         }
       }
     },
@@ -200,9 +212,18 @@
       }
     },
     mounted: function() {
-        <#if ec.web.savedErrors??><#list ec.web.savedErrors as errorMessage>
-          this.$q.notify({type: 'negative', message: '${errorMessage}.', icon: 'warning', position:'top'})
-        </#list></#if>
+      <#if ec.web.savedErrors??><#list ec.web.savedErrors as errorMessage>
+        this.$q.notify({type: 'negative', message: '${errorMessage}.', position:'top'})
+      </#list></#if>
+      <#if ec.web.savedMessages??><#list ec.web.savedMessages as message>
+        this.$q.notify({type: 'positive', message: '${message}.', position:'top'})
+      </#list></#if>
+      <#if ec.web.savedValidationErrors??><#list ec.web.savedValidationErrors as message>
+        this.$q.notify({type: 'warning', message: '${message}.', position:'top'})
+      </#list></#if>
+      <#if ec.web.parameters.tab??>
+        this.tab = '${ec.web.parameters.tab}'
+      </#if>
     }
   });
 </script>
