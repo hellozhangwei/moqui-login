@@ -17,67 +17,69 @@
 <div id="q-app">
   <div class="window-height window-width row justify-center items-center">
     <q-card class="my-card">
-      <q-card-section>
-        <div class="text-h6 text-center">WE SYS ERP</div>
+      <q-card-section class="bg-primary row items-center justify-center" style="height: 100px">
+        <div class="text-h4 text-white">WE SYS ERP</div>
       </q-card-section>
-      <q-tab-panels v-model="tab" animated style="min-height: 350px">
-        <q-tab-panel name="one">
-          <q-form @submit.prevent="submitForm" class="q-px-sm" action="${sri.buildUrl("login").url}" method="post">
-            <div class="row q-mb-md">
-              <q-banner class="bg-grey-3 col">
-                <template v-slot:avatar>
-                  <q-icon name="login" color="primary" />
-                </template>
-                <div class="text-h6">Login</div>
-              </q-banner>
-            </div>
-            <div class="row q-mb-md">
-              <q-input
-                  name="username"
-                  v-model="formData.email"
-                  :rules="[ val => !!val || 'Username is required.']"
-                  ref="username"
-                  lazy-rules
-                  outlined
-                  class="col"
-                  label="Username"
-                  stack-label />
-            </div>
-            <div class="row q-mb-md">
-              <q-input
-                  name="password"
-                  v-model="formData.password"
-                  ref="password"
-                  :rules="[ val => !!val || 'Password is required.']"
-                  lazy-rules
-                  type="password"
-                  outlined
-                  class="col"
-                  label="Password"
-                  stack-label />
-            </div>
+      <q-tab-panels v-model="tab" animated >
+        <q-tab-panel name="one" style="min-height: 380px" class="row items-center">
+          <#--<div class="row q-mb-md">
+            <q-banner class="bg-grey-3 col">
+              <template v-slot:avatar>
+                <q-icon name="login" color="primary" />
+              </template>
+              <div class="text-h6">Login</div>
+            </q-banner>
+          </div>-->
+
+          <q-form @submit.prevent="submitForm" class="col" action="${sri.buildUrl("login").url}" method="post">
+            <q-input
+                name="username"
+                v-model="formData.email"
+                :rules="[ val => !!val || 'Username is required.']"
+                ref="username"
+                lazy-rules
+                outlined
+                clearable
+                label="Username">
+              <template v-slot:prepend>
+                <q-icon name="perm_identity"></q-icon>
+              </template>
+            </q-input>
+
+            <q-input
+                name="password"
+                v-model="formData.password"
+                ref="password"
+                :rules="[ val => !!val || 'Password is required.']"
+                lazy-rules
+                type="password"
+                outlined
+                clearable
+                label="Password">
+              <template v-slot:prepend>
+                <q-icon name="lock"></q-icon>
+              </template>
+            </q-input>
+
             <div class="row justify-end">
-              <q-btn
-                  color="primary"
-                  label="Login"
-                  type="submit" />
+              <q-btn color="primary" label="Login" type="submit"></q-btn>
             </div>
           </q-form>
         </q-tab-panel>
 
-        <q-tab-panel name="two">
-          <form @submit.prevent="submitForm" class="q-px-sm" action="${sri.buildUrl("resetPassword").url}" method="post">
+        <q-tab-panel name="two" style="min-height: 380px" class="row items-center">
+          <form @submit.prevent="submitForm" class="col" action="${sri.buildUrl("resetPassword").url}" method="post">
             <input type="hidden" name="moquiSessionToken" value="${ec.web.sessionToken}">
             <input type="hidden" name="tab" value="two">
-            <div class="row q-mb-md">
+            <#--<div class="row q-mb-md">
               <q-banner class="bg-grey-3 col">
                 <template v-slot:avatar>
                   <q-icon name="forward_to_inbox" color="primary" />
                 </template>
                 <div class="text-h6">Reset Password</div>
               </q-banner>
-            </div>
-            <div class="row q-mb-md">
+            </div>-->
+
               <q-input
                   name="username"
                   v-model="formData.username"
@@ -85,87 +87,77 @@
                   :rules="[ val => !!val || 'Username is required.']"
                   lazy-rules
                   outlined
-                  class="col"
                   label="Username"
-                  stack-label />
-            </div>
+                  stack-label ></q-input>
 
             <div class="row justify-end">
               <q-btn
                   color="primary"
                   label="Reset & Email Password"
-                  type="submit" />
+                  type="submit"></q-btn>
             </div>
           </form>
         </q-tab-panel>
-        <q-tab-panel name="three">
-          <form @submit.prevent="submitForm" class="q-px-sm" action="${sri.buildUrl("changePassword").url}" method="post">
+        <q-tab-panel name="three" style="min-height: 380px" class="row items-center">
+          <form @submit.prevent="submitForm" class="col" action="${sri.buildUrl("changePassword").url}" method="post">
             <input type="hidden" name="moquiSessionToken" value="${ec.web.sessionToken}">
             <input type="hidden" name="tab" value="three">
-            <div class="row q-mb-md">
+            <#--<div class="row q-mb-md">
               <q-banner class="bg-grey-3 col">
                 <template v-slot:avatar>
                   <q-icon name="password" color="primary" />
                 </template>
                 <div class="text-h6">Change Password</div>
               </q-banner>
-            </div>
-            <div class="row ">
-              <q-input
-                  name="username"
-                  v-model="formData.username"
-                  ref="username"
-                  :rules="[ val => !!val || 'Username is required.']"
-                  lazy-rules
-                  outlined
-                  class="col"
-                  label="Username"
-                  stack-label />
-            </div>
-            <div class="row">
-              <q-input
-                  name="oldPassword"
-                  v-model="formData.oldPassword"
-                  :rules="[ val => !!val || 'Old Password is required.']"
-                  ref="oldPassword"
-                  lazy-rules
-                  type="password"
-                  outlined
-                  class="col"
-                  label="Old Password"
-                  stack-label />
-            </div>
-            <div class="row ">
-              <q-input
-                  name="newPassword"
-                  v-model="formData.newPassword"
-                  :rules="[ val => val.length >= 6 || 'Please enter at least 6 characters.']"
-                  ref="oldPassword"
-                  lazy-rules
-                  type="password"
-                  outlined
-                  class="col"
-                  label="New Password"
-                  stack-label />
-            </div>
-            <div class="row ">
-              <q-input
-                  name="newPasswordVerify"
-                  v-model="formData.newPasswordVerify"
-                  :rules="[ val => val.length >= 6 || 'Please enter at least 6 characters.']"
-                  ref="newPasswordVerify"
-                  lazy-rules
-                  type="password"
-                  outlined
-                  class="col"
-                  label="New Password Verify"
-                  stack-label />
-            </div>
+            </div>-->
+            <q-input
+                name="username"
+                v-model="formData.username"
+                ref="username"
+                :rules="[ val => !!val || 'Username is required.']"
+                lazy-rules
+                outlined
+                label="Username"
+                stack-label>
+            </q-input>
+
+            <q-input
+                name="oldPassword"
+                v-model="formData.oldPassword"
+                :rules="[ val => !!val || 'Old Password is required.']"
+                ref="oldPassword"
+                lazy-rules
+                type="password"
+                outlined
+                label="Old Password"
+                stack-label >
+            </q-input>
+
+            <q-input
+                name="newPassword"
+                v-model="formData.newPassword"
+                :rules="[ val => val.length >= 6 || 'Please enter at least 6 characters.']"
+                ref="oldPassword"
+                lazy-rules
+                type="password"
+                outlined
+                label="New Password">
+            </q-input>
+
+            <q-input
+                name="newPasswordVerify"
+                v-model="formData.newPasswordVerify"
+                :rules="[ val => val.length >= 6 || 'Please enter at least 6 characters.']"
+                ref="newPasswordVerify"
+                lazy-rules
+                type="password"
+                outlined
+                label="New Password Verify"
+                stack-label>
+            </q-input>
+
             <div class="row justify-end">
-              <q-btn
-                  color="primary"
-                  label="Change Password"
-                  type="submit" />
+              <q-btn color="primary" label="Change Password" type="submit" ></q-btn>
             </div>
           </form>
         </q-tab-panel>
