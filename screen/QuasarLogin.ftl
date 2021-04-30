@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Moqui</title>
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'>
-  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/quasar@1.14.5/dist/quasar.min.css'>
+<#--  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'>-->
+<#--  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/quasar@1.14.5/dist/quasar.min.css'>-->
+  <link rel='stylesheet' href='/zstatic/material-icons/iconfont/material-icons.css'>
+  <link rel='stylesheet' href='/libs/quasar/quasar.min.css'>
   <style type="text/css">
     .my-card {
       margin: 0 auto;
