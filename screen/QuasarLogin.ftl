@@ -57,11 +57,28 @@
                 type="password"
                 outlined
                 clearable
-                label="Password">
+                label="Password"
+                autocomplete="on">
               <template v-slot:prepend>
                 <q-icon name="lock"></q-icon>
               </template>
             </q-input>
+
+            <div class="row">
+              <q-input
+                      name="captchaResponse"
+                      v-model="formData.captchaResponse"
+                      :rules="[ val => !!val || 'captcha is required.']"
+                      ref="captchaResponse"
+                      lazy-rules
+                      outlined
+                      clearable
+                      label=""
+                      class="col-md-6">
+              </q-input>
+              <#--<q-img id="captcha" src="/jcaptcha" style="height: 50px; max-width: 150px" @click="this.src='/jcaptcha?t='+new Date().getTime();"></q-img>-->
+              <img id="captcha" src="/jcaptcha" onclick="this.src='/jcaptcha?t='+new Date().getTime();" style="cursor:"></img>
+            </div>
 
             <div class="row justify-end">
               <q-btn color="primary" label="Login" type="submit"></q-btn>
@@ -186,6 +203,7 @@
         formData: {
           username: '',
           password: '',
+          captchaResponse: '',
           oldPassword: '',
           newPassword: '',
           newPasswordVerify: ''

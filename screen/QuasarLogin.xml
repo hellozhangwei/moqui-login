@@ -17,6 +17,13 @@ along with this software (see the LICENSE.md file). If not, see
         default-menu-include="false" require-authentication="false" standalone="true">
     <transition name="login" require-session-token="false">
         <actions>
+            <script>
+                import com.moshi.impl.captcha.CaptchaServiceSingleton
+                boolean isResponseCorrect = CaptchaServiceSingleton.validateResponseForID(ec, captchaResponse)
+            </script>
+            <if condition="!isResponseCorrect">
+                <return message="captach is not correct" error="true"/>
+            </if>
             <script>ec.user.loginUser(username, password)</script>
         </actions>
         <default-response type="screen-last"/><error-response url="."/>
