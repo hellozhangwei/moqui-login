@@ -40,8 +40,33 @@ along with this software (see the LICENSE.md file). If not, see
         <default-response url="." save-parameters="true"/>
         <error-response url="." save-parameters="true"/>
     </transition>
-
+    <transition name="createInitialAdminAccount"><service-call name="org.moqui.impl.UserServices.create#InitialAdminAccount"/>
+        <default-response url="../Login"/><error-response url="."/></transition>
     <widgets>
-        <render-mode><text type="html" location="component://moqui-login/screen/QuasarLogin.ftl"/></render-mode>
+
+        <!-- if there are no user accounts, other than the _NA_ UserAccount which is in seed data, show form to create admin account -->
+        <section name="NeedsSetupSection" condition="ec.entity.find('moqui.security.UserAccount').disableAuthz().count() > 1">
+            <widgets>
+                <render-mode><text type="html" location="component://moqui-login/screen/QuasarLogin.ftl"/></render-mode>
+            </widgets>
+            <fail-widgets>
+                <render-mode><text type="html"><![CDATA[
+                    <div class="text-center">
+                        <h3>Welcome to your new system</h3>
+                        <form method="post" action="${sri.buildUrl("createInitialAdminAccount").url}" class="form-signin" id="InitialAdminForm">
+                            <p class="text-muted text-center">There are no user accounts, get started by creating an initial administrator account</p>
+                            <input type="hidden" name="moquiSessionToken" value="${ec.web.sessionToken}">
+                            <input type="text" name="username" value="${(ec.getWeb().getErrorParameters().get("username"))!""}" placeholder="Username" required="required" class="form-control top">
+                            <input type="password" name="newPassword" placeholder="New Password" required="required" class="form-control middle">
+                            <input type="password" name="newPasswordVerify" placeholder="New Password Verify" required="required" class="form-control middle">
+                            <input type="text" name="userFullName" value="${(ec.getWeb().getErrorParameters().get("userFullName"))!""}" placeholder="User Full Name" required="required" class="form-control middle">
+                            <input type="text" name="emailAddress" value="${(ec.getWeb().getErrorParameters().get("emailAddress"))!""}" placeholder="Email Address" required="required" class="form-control bottom">
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Create Initial Admin Account</button>
+                        </form>
+                    </div>
+                    ]]></text>
+                </render-mode>
+            </fail-widgets>
+        </section>
     </widgets>
 </screen>
