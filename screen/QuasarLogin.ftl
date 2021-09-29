@@ -191,8 +191,8 @@
   </div>
 </div>
 <!-- partial -->
-<script src='https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js'></script>
-<script src='https://cdn.jsdelivr.net/npm/quasar@1.14.5/dist/quasar.umd.min.js'></script>
+<script src='/libs/vue/vue.min.js'></script>
+<script src='/libs/quasar/quasar.umd.min.js'></script>
 <script>
 
   new Vue({
