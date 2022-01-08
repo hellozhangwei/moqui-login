@@ -42,7 +42,7 @@
                 lazy-rules
                 outlined
                 clearable
-                label="Username">
+                label="${ec.l10n.localize("Username")}">
               <template v-slot:prepend>
                 <q-icon name="perm_identity"></q-icon>
               </template>
@@ -57,7 +57,7 @@
                 type="password"
                 outlined
                 clearable
-                label="Password"
+                label="${ec.l10n.localize("Password")}"
                 autocomplete="on">
               <template v-slot:prepend>
                 <q-icon name="lock"></q-icon>
@@ -73,15 +73,16 @@
                       lazy-rules
                       outlined
                       clearable
-                      label=""
-                      class="col-md-6">
+                      label="Captcha"
+                      class="col-md-6"
+                      stack-label>
               </q-input>
               <#--<q-img id="captcha" src="/jcaptcha" style="height: 50px; max-width: 150px" @click="this.src='/jcaptcha?t='+new Date().getTime();"></q-img>-->
               <img id="captcha" src="/jcaptcha" onclick="this.src='/jcaptcha?t='+new Date().getTime();" style="cursor:"></img>
             </div>
 
             <div class="row justify-end">
-              <q-btn color="primary" label="Login" type="submit"></q-btn>
+              <q-btn color="primary" label="${ec.l10n.localize("Login")}" type="submit"></q-btn>
             </div>
           </q-form>
         </q-tab-panel>
@@ -106,13 +107,13 @@
                   :rules="[ val => !!val || 'Username is required.']"
                   lazy-rules
                   outlined
-                  label="Username"
+                  label="${ec.l10n.localize("Username")}"
                   stack-label ></q-input>
 
             <div class="row justify-end">
               <q-btn
                   color="primary"
-                  label="Reset & Email Password"
+                  label="${ec.l10n.localize("Reset & Email Password")}"
                   type="submit"></q-btn>
             </div>
           </form>
@@ -136,7 +137,7 @@
                 :rules="[ val => !!val || 'Username is required.']"
                 lazy-rules
                 outlined
-                label="Username"
+                label="${ec.l10n.localize("Username")}"
                 stack-label>
             </q-input>
 
@@ -148,7 +149,7 @@
                 lazy-rules
                 type="password"
                 outlined
-                label="Old Password"
+                label="${ec.l10n.localize("Old Password")}"
                 stack-label >
             </q-input>
 
@@ -160,7 +161,8 @@
                 lazy-rules
                 type="password"
                 outlined
-                label="New Password">
+                label="${ec.l10n.localize("New Password")}"
+                stack-label>
             </q-input>
 
             <q-input
@@ -171,21 +173,21 @@
                 lazy-rules
                 type="password"
                 outlined
-                label="New Password Verify"
+                label="${ec.l10n.localize("New Password Verify")}"
                 stack-label>
             </q-input>
 
             <div class="row justify-end">
-              <q-btn color="primary" label="Change Password" type="submit" ></q-btn>
+              <q-btn color="primary" label="${ec.l10n.localize("Change Password")}" type="submit" ></q-btn>
             </div>
           </form>
         </q-tab-panel>
       </q-tab-panels>
       <q-separator></q-separator>
       <q-tabs v-model="tab" class="text-secondary">
-        <q-tab label="Login" name="one" class="col" style="width:200px"></q-tab>
-        <q-tab label="Reset Password" name="two" class="col" style="width:200px"></q-tab>
-        <q-tab label="Change Password" name="three" class="col" style="width:200px"></q-tab>
+        <q-tab label="${ec.l10n.localize("Login")}" name="one" class="col" style="width:200px"></q-tab>
+        <q-tab label="${ec.l10n.localize("Reset Password")}" name="two" class="col" style="width:200px"></q-tab>
+        <q-tab label="${ec.l10n.localize("Change Password")}" name="three" class="col" style="width:200px"></q-tab>
       </q-tabs>
     </q-card>
   </div>
