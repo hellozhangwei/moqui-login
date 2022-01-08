@@ -73,7 +73,7 @@
                       lazy-rules
                       outlined
                       clearable
-                      label="Captcha"
+                      label="${ec.l10n.localize("Captcha")}"
                       class="col-md-6"
                       stack-label>
               </q-input>
