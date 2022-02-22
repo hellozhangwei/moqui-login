@@ -1,12 +1,11 @@
+<#assign contextPath>${ec.web.servletContext.contextPath}</#assign>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
   <title>Moqui</title>
-<#--  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'>-->
-<#--  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/quasar@1.14.5/dist/quasar.min.css'>-->
-  <link rel='stylesheet' href='/zstatic/material-icons/iconfont/material-icons.css'>
-  <link rel='stylesheet' href='/libs/quasar/quasar.min.css'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons'>
+  <link rel='stylesheet' href='${contextPath}/libs/quasar/quasar.min.css'>
   <style type="text/css">
     .my-card {
       margin: 0 auto;
@@ -193,8 +192,8 @@
   </div>
 </div>
 <!-- partial -->
-<script src='/libs/vue/vue.min.js'></script>
-<script src='/libs/quasar/quasar.umd.min.js'></script>
+<script src='${contextPath}/libs/vue/vue.min.js'></script>
+<script src='${contextPath}/libs/quasar/quasar.umd.min.js'></script>
 <script>
 
   new Vue({
